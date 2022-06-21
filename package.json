@@ -19,14 +19,17 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist",
+    "clean:windows": "del \"./dist\"",
     "clean:demo": "rm -rf ./demo/dist",
+    "clean:demo:windows": "del -f './demo/dist'",
     "build": "rollup -c ",
     "dev": "parcel ./demo/src/index.html --dist-dir ./demo/dist",
     "demo:start": "parcel ./demo/src/index.html --dist-dir ./demo/dist",
     "demo:build": "parcel build ./demo/src/index.html --dist-dir ./demo/dist --public-url ./",
     "demo:deploy": "npm run demo:build && gh-pages -d ./demo/dist",
     "prepare": "npm run build",
-    "prepublish": "rm -rf ./dist && npm run build",
+    "prepublish": "npm run clean:windows && npm run build",
+    "prepublish:windows": "npm run clean:windows && npm run build",
     "lint": "eslint ./lib/** --fix ",
     "format": "prettier --write  \"lib/**/*.+(js|jsx)\""
   },
